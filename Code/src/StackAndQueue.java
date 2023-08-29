@@ -1,3 +1,7 @@
+import java.util.LinkedList;
+import java.util.Queue;
+import java.util.Stack;
+
 public class StackAndQueue {
     public static class Node<T> {
         public T value;
@@ -8,6 +12,7 @@ public class StackAndQueue {
             value = data;
         }
     }
+
     public static class DoubleEndsQueue<T> {
         public Node<T> head;
         public Node<T> tail;
@@ -15,9 +20,9 @@ public class StackAndQueue {
         public void addFromHead(T value) {
             Node<T> cur = new Node<>(value);
             // 0个数
-            if (head == null){
-                head =cur;
-                tail= cur;
+            if (head == null) {
+                head = cur;
+                tail = cur;
             }
             // 一个数  情况不存在
 //            else if( tail == head){
@@ -27,22 +32,21 @@ public class StackAndQueue {
 //            }
             // 多个数
             else {
-                cur.next =head;
+                cur.next = head;
                 head.last = cur;
-                head= cur;
+                head = cur;
             }
         }
 
         public void addFromBottom(T value) {
             Node<T> cur = new Node<>(value);
-            if (head == null){
-                head=cur;
-                tail=cur;
-            }
-            else {
-                cur.last =tail;
-                tail.next =cur;
-                tail =cur;
+            if (head == null) {
+                head = cur;
+                tail = cur;
+            } else {
+                cur.last = tail;
+                tail.next = cur;
+                tail = cur;
             }
 
         }
@@ -93,8 +97,9 @@ public class StackAndQueue {
         }
 
         public boolean isEmpty() {
-            return head==null;
+            return head == null;
         }
+
         public static class MyStack<T> {
             private DoubleEndsQueue<T> queue;
 
@@ -115,6 +120,7 @@ public class StackAndQueue {
             }
 
         }
+
         public static class MyQueue<T> {
             private DoubleEndsQueue<T> queue;
 
@@ -136,4 +142,43 @@ public class StackAndQueue {
 
         }
     }
+
+
+    // 用栈实现队列
+    public static class TwoStacksQueue {
+        public Stack<Integer> stackPush;
+        public Stack<Integer> stackPop;
+
+        public TwoStacksQueue() {
+            stackPush = new Stack<Integer>();
+            stackPop = new Stack<Integer>();
+        }
+
+        // push栈向pop栈倒入数据
+        private void pushToPop() {
+            if (stackPop.isEmpty()) {
+                while (!stackPush.isEmpty()) {
+                    stackPop.push(stackPush.pop());
+                }
+            }
+        }
+
+        public void add(int pushInt) {
+            stackPush.push(pushInt);
+        }
+
+        public int poll() {
+            pushToPop();
+            return stackPop.pop();
+        }
+
+        public int peek() {
+            pushToPop();
+            return stackPop.peek();
+        }
+    }
+
 }
+
+
+
