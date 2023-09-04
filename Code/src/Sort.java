@@ -118,24 +118,73 @@ public class Sort {
             arr[L + i] = help[i];
         }
     }
-    // 非递归版本
-    public static void mergeSort3(int[] arr) {
+// 非递归方法实现
+    public static void mergeSort2(int[] arr) {
+//        if (arr == null || arr.length < 2) {
+//            return;
+//        }
+//        int step=1;
+//        int L,M,R=-1;
+//        while (step<= arr.length/2){
+//             L = 0;
+//            while (R<arr.length){
+//                L= R+1;
+//                M = L+step-1;
+//                if(  M+step<arr.length){
+//                    R = M+step;
+//                }
+//                else {
+//                    R = arr.length-1;
+//                }
+//                merge_self(arr,L,M,R);
+//            }
+//            step = step<<1;
+//        }
         if (arr == null || arr.length < 2) {
             return;
         }
-        int step=1;
-        int n =0;
-        while (step<arr.length){
-            //
-            for(int i=0;i<arr.length;i+=step)
-            {
-                // size = step
-                // i he i+step  L= i M=i+step-1 R=i+step+size
-                arr[i] =
-
+        int N = arr.length;
+        int mergeSize = 1;// 当前有序的，左组长度
+        // 一组是2倍的mergeSize
+        while (mergeSize < N) { // log N
+            int L = 0;
+            // 0....
+            while (L < N) {
+                // L...M  左组（mergeSize）
+                int M = L + mergeSize - 1;
+                if (M >= N) { // 当前组凑不齐,只有左边, 肯定有序
+                    break;    // 预防越界风险
+                }
+                //  L...M   M+1...R(mergeSize)
+                // 有可能最后一组右组数目不够
+                int R = Math.min(M + mergeSize, N - 1);
+                merge(arr, L, M, R);
+                L = R + 1; // 下一次左组
             }
-            step= step<<1;
+            // 防止溢出, INT_MAX
+            if (mergeSize > N / 2) {
+                break;
+            }
+            mergeSize <<= 1;
         }
-
     }
+    public static void merge_self(int[] arr, int L, int M, int R) {
+        int [] copy = new int [L-R+1];
+        int p1= L;
+        int p2 = M+1;
+        int index=0;
+        while (p1<=M && p2<= R){
+            copy[index++] = arr[p1] <= arr[p2] ? arr[p1++]:arr[p2++];
+        }
+        while (p1<=M){
+            copy[index++] = arr[p1++];
+        }
+        while (p2<=R){
+            copy[index++]= arr[p2++];
+        }
+        for(int i =0;i<L-R+1;i++){
+            arr[L+i] =copy[i];
+        }
+    }
+
 }
