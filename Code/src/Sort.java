@@ -48,7 +48,7 @@ public class Sort {
     }
 
 
-    // 递归方法实现归并排序
+    // ???é·?·¨?????é?????ò
     public static void mergeSort1(int[] arr) {
         if (arr == null || arr.length < 2) {
             return;
@@ -56,7 +56,7 @@ public class Sort {
         process(arr, 0, arr.length - 1);
     }
 
-    // arr[L...R]范围上，变成有序的
+    // arr[L...R]·??§????±??????ò??
 // L...R    N    T(N) = 2*T(N/2) + O(N)  ->
     public static void process(int[] arr, int L, int R) {
         if (L==R){ // base case
@@ -70,7 +70,7 @@ public class Sort {
 
     public static void merge(int[] arr, int L, int M, int R) {
         int[] help = new int[R - L + 1];
-        //写的不会
+        //???????á
 //            int index=0;
 //            int mid =M;
 //            int l =L;
@@ -107,7 +107,7 @@ public class Sort {
         while (p1 <= M && p2 <= R) {
             help[i++] = arr[p1] <= arr[p2] ? arr[p1++] : arr[p2++];
         }
-        // 要么p1越界了，要么p2越界了
+        // ????p1????????????p2??????
         while (p1 <= M) {
             help[i++] = arr[p1++];
         }
@@ -118,7 +118,7 @@ public class Sort {
             arr[L + i] = help[i];
         }
     }
-// 非递归方法实现
+// ·????é·?·¨????
     public static void mergeSort2(int[] arr) {
 //        if (arr == null || arr.length < 2) {
 //            return;
@@ -144,24 +144,24 @@ public class Sort {
             return;
         }
         int N = arr.length;
-        int mergeSize = 1;// 当前有序的，左组长度
-        // 一组是2倍的mergeSize
+        int mergeSize = 1;// ?±?°???ò????×ó×é?¤??
+        // ??×é??2±???mergeSize
         while (mergeSize < N) { // log N
             int L = 0;
             // 0....
             while (L < N) {
-                // L...M  左组（mergeSize）
+                // L...M  ×ó×é?¨mergeSize??
                 int M = L + mergeSize - 1;
-                if (M >= N) { // 当前组凑不齐,只有左边, 肯定有序
-                    break;    // 预防越界风险
+                if (M >= N) { // ?±?°×é??????,????×ó±?, ???¨???ò
+                    break;    // ?¤·?????·???
                 }
                 //  L...M   M+1...R(mergeSize)
-                // 有可能最后一组右组数目不够
+                // ??????×??ó??×é??×é????????
                 int R = Math.min(M + mergeSize, N - 1);
                 merge(arr, L, M, R);
-                L = R + 1; // 下一次左组
+                L = R + 1; // ??????×ó×é
             }
-            // 防止溢出, INT_MAX
+            // ·???????, INT_MAX
             if (mergeSize > N / 2) {
                 break;
             }

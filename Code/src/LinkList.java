@@ -18,7 +18,7 @@ public class LinkList {
             value = data;
         }
     }
-    // ·´×ªµ¥Á´
+    // åè½¬å•é“¾
     public static Node reverseLinkedList(Node head) {
         Node pre = null;
         Node next =null;
@@ -29,10 +29,10 @@ public class LinkList {
             head =next;
 
         }
-        // ×¢ÒâreturnÊ²Ã´
+        // æ³¨æ„returnä»€ä¹ˆ
         return pre;
     }
-    //·´×ªË«Á´
+    //åè½¬åŒé“¾
     public static DoubleNode reverseDoubleList(DoubleNode head) {
         DoubleNode pre = null;
         DoubleNode next =null;
@@ -45,7 +45,7 @@ public class LinkList {
         }
         return pre;
     }
-    // É¾µôÁ´±íµÄÄ³Ò»¸öÖµ
+    // åˆ æ‰é“¾è¡¨çš„æŸä¸€ä¸ªå€¼
 //    public static Node removeValue(Node head, int num) {
 //        Node temp =head;
 //        while (temp != null){
@@ -61,11 +61,11 @@ public class LinkList {
 //    }
 
 
-    // É¾ÄÄÒ»¸öÊıÒªÓĞÇåÎúµÄÈÏÊ¶£¬É¾´íÁËÉ¾ÁËÒªÉ¾µÄÏÂÒ»¸öÊı
-    //×¢ÒâÍ·½Úµã
+    // åˆ å“ªä¸€ä¸ªæ•°è¦æœ‰æ¸…æ™°çš„è®¤è¯†ï¼Œåˆ é”™äº†åˆ äº†è¦åˆ çš„ä¸‹ä¸€ä¸ªæ•°
+    //æ³¨æ„å¤´èŠ‚ç‚¹
 
     public static Node removeValue(Node head, int num) {
-        // headÀ´µ½µÚÒ»¸ö²»ĞèÒªÉ¾µÄÎ»ÖÃ, ×÷Îª×îºóÁ´±íµÄÍ·½áµã
+        // headæ¥åˆ°ç¬¬ä¸€ä¸ªä¸éœ€è¦åˆ çš„ä½ç½®, ä½œä¸ºæœ€åé“¾è¡¨çš„å¤´ç»“ç‚¹
         while (head != null) {
             if (head.value != num) {
                 break;
